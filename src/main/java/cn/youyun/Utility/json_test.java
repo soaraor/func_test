@@ -101,9 +101,11 @@ public class json_test {
             System.out.print(object[i]+"\t");
         }
 
+        //map通过put添加元素后，又被当做元素添加到jsonobject中，然后以json格式输出
         System.out.println("map4put内容：");
         System.out.println(map4put());
 
+        //签名功能测试
         System.out.println("签名功能测试：");
         System.out.println(Sign.GetSign("Aaaa123","测试","Aaaa","abc","PNDSSK","1480414431","aduer"));
 
