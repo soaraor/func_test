@@ -13,11 +13,11 @@ public class Sign {
      * @return
      */
     public static String GetSign(String DeviceID,String DeviceName,String DockingDeviceID,String GUID,String nouceStr,String timeStamp,String DockingSecret){
-        String Sign = null;//最终用以保存签名结果的字符串
-        String stringA = "DeviceID="+DeviceID+"&DeviceName="+DeviceName+"&DockingDeviceID="+DockingDeviceID+"&GUID="+GUID+"&nouceStr="+nouceStr+"&timeStamp="+timeStamp;
+        String Sign = "";//最终用以保存签名结果的字符串
+        String stringA = "DeviceID="+DeviceID+"&DeviceName="+DeviceName+"&DockingDeviceID="+DockingDeviceID+"&GUID="+GUID+"&nonceStr="+nouceStr+"&timeStamp="+timeStamp;
         String StringSignTemp = stringA +"&"+ DockingSecret;//拼接字符
         StringSignTemp = StringSignTemp.toLowerCase();//全部转为小写
-        Sign = MD5.MD5(StringSignTemp);
+        Sign =MD5.MD5(StringSignTemp);
         return Sign;
     }
 }
