@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.util.*;
 
-public class json_test {
+public class func_test {
     public static String jsonobject(int count) {//JSONObject输出格式
         JSONObject params = new JSONObject(new LinkedHashMap<String, Object>());
         Map ReOject = new LinkedHashMap();
@@ -147,7 +147,7 @@ public class json_test {
         System.out.println("");
 
         //httpPost功能测试
-        String RegisterTest = "DeviceID="+ DataUtil.GetDeviceID(DockingDeviceID)+"&DeviceName="+DeviceName+"&DockingDeviceID="+DockingDeviceID+"&GUID="+GUID+"&nonceStr=5K8264ILTKCH16CQ2502SI8ZNMTM67VS"+"&timestamp="+DataUtil.GetTimestamp()+"&sign="+Sign;
+        String RegisterTest = "deviceid="+ DeviceID+"&devicename="+DeviceName+"&DockingDeviceID="+DockingDeviceID+"&guid="+GUID+"&nonceStr=5K8264ILTKCH16CQ2502SI8ZNMTM67VS"+"&timestamp="+DataUtil.GetTimestamp()+"&sign="+Sign;
         String requestURL = "http://test.api.docking.aduer.com/api/RegisterDevice/";
         try {
             System.out.println(Post4Pay.HttpPost(RegisterTest,requestURL));
