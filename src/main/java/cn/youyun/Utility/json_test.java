@@ -2,10 +2,8 @@ package cn.youyun.Utility;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import sun.security.provider.MD5;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -69,6 +67,7 @@ public class json_test {
         map.put(3,"呃");
         map.put(4,"咦");
         map.put(5,"唔");
+        map.put(6,"喻");
         jsonob.put("map",map);
         return jsonob;
     }
@@ -104,10 +103,28 @@ public class json_test {
         //map通过put添加元素后，又被当做元素添加到jsonobject中，然后以json格式输出
         System.out.println("map4put内容：");
         System.out.println(map4put());
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
 
         //签名功能测试
         System.out.println("签名功能测试：");
-        System.out.println(Sign.GetSign("Aaaa123","测试","Aaaa","abc","PNDSSK","1480414431","aduer"));
+        System.out.println(Sign.GetSign("1aduer1000000001","1aduer收银","1aduer","kveb7WKHct","5K8264ILTKCH16CQ2502SI8ZNMTM67VS","1234567890","753951"));
+        System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
+        System.out.println("");
 
+        //httpPost功能测试
+        String posttest = "deviceid=1aduer1000000001&devicename=1aduer收银&DockingDeviceID=1aduer&guid=kveb7WKHct&nonceStr=5K8264ILTKCH16CQ2502SI8ZNMTM67VS&timestamp=1234567890&sign=11D88FEAADFC09668B4A3A660C7A53FF";
+        String requestURL = "http://test.api.docking.aduer.com/api/RegisterDevice/";
+        try {
+            System.out.println(Post4Pay.HttpPost(posttest,requestURL));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

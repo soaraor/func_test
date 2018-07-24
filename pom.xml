@@ -30,7 +30,6 @@
       <artifactId>fastjson</artifactId>
       <version>1.2.7</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.webjars.npm/md5 -->
     <dependency>
       <groupId>org.webjars.npm</groupId>
       <artifactId>md5</artifactId>
@@ -40,6 +39,11 @@
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
       <version>5.0.12.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.5</version>
     </dependency>
   </dependencies>
 
