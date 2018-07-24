@@ -3,9 +3,7 @@ package cn.youyun.Utility;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class json_test {
     public static String jsonobject(int count) {//JSONObject输出格式
@@ -99,10 +97,12 @@ public class json_test {
         for(int i=0;i<object.length;++i){
             System.out.print(object[i]+"\t");
         }
+        System.out.println("\r");
 
         //map通过put添加元素后，又被当做元素添加到jsonobject中，然后以json格式输出
         System.out.println("map4put内容：");
         System.out.println(map4put());
+
         System.out.println("");
         System.out.println("");
         System.out.println("");
@@ -112,17 +112,45 @@ public class json_test {
         System.out.println("");
 
 
-        //签名功能测试
+        Scanner scanner = new Scanner(System.in);//定义键盘读取器
+
+        //读入DockingDeviceID
+        String DockingDeviceID = "";
+        System.out.println("请输入对接注册设备标识开头（回车键结束）：");
+        DockingDeviceID = scanner.next();
+
+        //获取DeviceID
+        String DeviceID ="";
+        DeviceID = DataUtil.GetDeviceID(DockingDeviceID);
+
+        //读入DeviceName
+        String DeviceName = "";
+        System.out.println("请输入设备名称（回车键结束）：");
+        DeviceName = scanner.next();
+
+        //读入GUID
+        String GUID = "";
+        System.out.println("请输入商家唯一标识（回车键结束）：");
+        DeviceName = scanner.next();
+
+        //读入对接秘钥
+        String DockingSecre = "";
+        System.out.println("请输入对接秘钥（回车键结束）：");
+        DockingSecre = scanner.next();
+
+
+        //Sign块功能测试100
         System.out.println("签名功能测试：");
-        System.out.println(Sign.GetSign("1aduer1000000001","1aduer收银","1aduer","kveb7WKHct","5K8264ILTKCH16CQ2502SI8ZNMTM67VS","1234567890","753951"));
+        String Sign = DataUtil.GetSign(DeviceID,DeviceName,DockingDeviceID,GUID,"5K8264ILTKCH16CQ2502SI8ZNMTM67VS",DataUtil.GetTimestamp(),DockingSecre);
+        System.out.println(Sign);
         System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
         System.out.println("");
 
         //httpPost功能测试
-        String posttest = "deviceid=1aduer1000000001&devicename=1aduer收银&DockingDeviceID=1aduer&guid=kveb7WKHct&nonceStr=5K8264ILTKCH16CQ2502SI8ZNMTM67VS&timestamp=1234567890&sign=11D88FEAADFC09668B4A3A660C7A53FF";
+        String RegisterTest = "DeviceID="+ DataUtil.GetDeviceID(DockingDeviceID)+"&DeviceName="+DeviceName+"&DockingDeviceID="+DockingDeviceID+"&GUID="+GUID+"&nonceStr=5K8264ILTKCH16CQ2502SI8ZNMTM67VS"+"&timestamp="+DataUtil.GetTimestamp()+"&sign="+Sign;
         String requestURL = "http://test.api.docking.aduer.com/api/RegisterDevice/";
         try {
-            System.out.println(Post4Pay.HttpPost(posttest,requestURL));
+            System.out.println(Post4Pay.HttpPost(RegisterTest,requestURL));
         }catch (Exception e){
             e.printStackTrace();
         }
