@@ -131,7 +131,11 @@ public class func_test {
         //读入GUID
         String GUID = "";
         System.out.println("请输入商家唯一标识（回车键结束）：");
-        DeviceName = scanner.next();
+        GUID = scanner.next();
+
+        //获取时间戳
+        String timestamp = "";
+        timestamp = DataUtil.GetTimestamp();
 
         //读入对接秘钥
         String DockingSecre = "";
@@ -141,13 +145,13 @@ public class func_test {
 
         //Sign块功能测试100
         System.out.println("签名功能测试：");
-        String Sign = DataUtil.GetSign(DeviceID,DeviceName,DockingDeviceID,GUID,"5K8264ILTKCH16CQ2502SI8ZNMTM67VS",DataUtil.GetTimestamp(),DockingSecre);
+        String Sign = DataUtil.GetSign(DeviceID,DeviceName,DockingDeviceID,GUID,"5K8264ILTKCH16CQ2502SI8ZNMTM67VS",timestamp,DockingSecre);
         System.out.println(Sign);
         System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
         System.out.println("");
 
         //httpPost功能测试
-        String RegisterTest = "deviceid="+ DeviceID+"&devicename="+DeviceName+"&DockingDeviceID="+DockingDeviceID+"&guid="+GUID+"&nonceStr=5K8264ILTKCH16CQ2502SI8ZNMTM67VS"+"&timestamp="+DataUtil.GetTimestamp()+"&sign="+Sign;
+        String RegisterTest = "deviceid="+ DeviceID+"&devicename="+DeviceName+"&DockingDeviceID="+DockingDeviceID+"&guid="+GUID+"&nonceStr=5K8264ILTKCH16CQ2502SI8ZNMTM67VS"+"&timestamp="+timestamp+"&sign="+Sign;
         String requestURL = "http://test.api.docking.aduer.com/api/RegisterDevice/";
         try {
             System.out.println(Post4Pay.HttpPost(RegisterTest,requestURL));
