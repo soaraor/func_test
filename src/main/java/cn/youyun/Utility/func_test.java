@@ -1,5 +1,6 @@
 package cn.youyun.Utility;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
@@ -48,12 +49,14 @@ public class func_test {
         array.add(appendtest.append("champion"));
         return array;
     }
+
     public static Object[] MultiType(boolean judge){
         Object[] object = new Object[6];
         object [0] = 19951029;
         object [1] = new String[] { "liangsi", "xuesui" };//元素是一个数组，所以只返回数组第一个元素的地址
         object [2] = new Date();
         object [3] = judge;
+        object [5] = 3.151492653;
         return object;
     }
 
@@ -71,23 +74,25 @@ public class func_test {
     }
 
     public static void main(String[] args) {
-        System.out.println("JSONObject序列："+"\r");
-        System.out.println("====="+jsonobject(1));
-        System.out.println("JSONArray序列："+"\r");
-        System.out.println("====="+jsonarray(1));
-        System.out.println("MultiType内容：");
-        //System.out.println(String.format("%s",MultiType(true)));
+        System.out.println("");
+        System.out.println("= = = = = = = = = = = =JSONObject序列= = = = = = = = = = = =");
+        System.out.println(jsonobject(1));
+        System.out.println("");
+        System.out.println("= = = = = = = = = = = =JSONArray序列= = = = = = = = = = = =");
+        System.out.println(jsonarray(1));
+        System.out.println("");
+        System.out.println("= = = = = = = = = = = =MultiType内容= = = = = = = = = = = =");
 
         for(int n=0;n<MultiType(true).length;n++){
             System.out.println(String.valueOf(MultiType(true)[n]));
-        }
+        }//怎么输出数组元素的具体每一项，还未解决
 
-
-        System.out.println("\r"+"Object内容："+"\r");
+        System.out.println("");
+        System.out.println("= = = = = = = = = = = =Object内容= = = = = = = = = = = =");
         /**
          * Object类输出测试样例
          * */
-        boolean a = true;
+        boolean a = false;
         Object[] object = new Object[4];
         object [0] = 1110;
         object [1] = "liangsi";
@@ -100,63 +105,15 @@ public class func_test {
         System.out.println("\r");
 
         //map通过put添加元素后，又被当做元素添加到jsonobject中，然后以json格式输出
-        System.out.println("map4put内容：");
+        System.out.println("");
+        System.out.println("= = = = = = = = = = = =map4put内容= = = = = = = = = = = =");
         System.out.println(map4put());
 
         System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-
-
-        Scanner scanner = new Scanner(System.in);//定义键盘读取器
-
-        //读入DockingDeviceID
-        String DockingDeviceID = "";
-        System.out.println("请输入对接注册设备标识开头（回车键结束）：");
-        DockingDeviceID = scanner.next();
-
-        //获取DeviceID
-        String DeviceID ="";
-        DeviceID = DataUtil.GetDeviceID(DockingDeviceID);
-
-        //读入DeviceName
-        String DeviceName = "";
-        System.out.println("请输入设备名称（回车键结束）：");
-        DeviceName = scanner.next();
-
-        //读入GUID
-        String GUID = "";
-        System.out.println("请输入商家唯一标识（回车键结束）：");
-        GUID = scanner.next();
-
-        //获取时间戳
-        String timestamp = "";
-        timestamp = DataUtil.GetTimestamp();
-
-        //读入对接秘钥
-        String DockingSecre = "";
-        System.out.println("请输入对接秘钥（回车键结束）：");
-        DockingSecre = scanner.next();
-
-
-        //Sign块功能测试100
-        System.out.println("签名功能测试：");
-        String Sign = DataUtil.GetSign(DeviceID,DeviceName,DockingDeviceID,GUID,"5K8264ILTKCH16CQ2502SI8ZNMTM67VS",timestamp,DockingSecre);
-        System.out.println(Sign);
-        System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
-        System.out.println("");
-
-        //httpPost功能测试
-        String RegisterTest = "deviceid="+ DeviceID+"&devicename="+DeviceName+"&DockingDeviceID="+DockingDeviceID+"&guid="+GUID+"&nonceStr=5K8264ILTKCH16CQ2502SI8ZNMTM67VS"+"&timestamp="+timestamp+"&sign="+Sign;
-        String requestURL = "http://test.api.docking.aduer.com/api/RegisterDevice/";
-        try {
-            System.out.println(Post4Pay.HttpPost(RegisterTest,requestURL));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        System.out.println("= = = = = = = = = = = = string转jsonobject= = = = = = = = = = = =");
+        String test = "{\"ReObj\":{\"alipayaccount\":\"111\",\"company\":\"杭州有云科技有限公司\",\"devicesecret\":\"e8c28d941f61406056eec6c4a3ecc8b74da41e1e\"},\"msg\":\"注册成功\",\"success\":1}";
+        JSONObject str2json = new JSONObject(true);
+        str2json = JSON.parseObject(test);
+        System.out.println(str2json);
     }
 }

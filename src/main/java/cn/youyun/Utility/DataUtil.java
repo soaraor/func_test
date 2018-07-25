@@ -2,22 +2,25 @@ package cn.youyun.Utility;
 
 import java.util.Calendar;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class DataUtil {
     /**
-     * 由DockingDeviceID得到DeviceID
+     * 由DockingDeviceID, UserStr得到DeviceID
      * @param DockingDeviceID
+     * @param UserStr
      * @return DeviceID
      */
-    public static String GetDeviceID(String DockingDeviceID){
+    public static String GetDeviceID(String DockingDeviceID,String UserStr){
         String DeviceID = "";
-        DeviceID+=DockingDeviceID;//null拼接DockingDeviceID
-        System.out.println("请在下一行输入自定义字段（回车键结束）：");
-        Scanner scanner = new Scanner(System.in);
-        DeviceID+=(scanner.next());//读入用户字段并连接到DockingDeviceID尾部
+        DeviceID = DockingDeviceID + UserStr;//null拼接DockingDeviceID+用户字
         return DeviceID;
     }
 
+    /**
+     * 获取UTC时间戳
+     * @return timestamp
+     */
     public static String GetTimestamp(){
         String timestamp = "";
         Calendar calendar = Calendar.getInstance();
@@ -25,29 +28,23 @@ public class DataUtil {
         return timestamp;
     }
 
-
-
-
-
-
     /**
-     * 对输入的参数做出反应，返回MD5处理的签名字符串
-     * @param DeviceID 设备标识
-     * @param DeviceName 设备名称
-     * @param DockingDeviceID 对接注册设备标识开头
-     * @param GUID 商家唯一标识
-     * @param nouceStr 随机字符串
-     * @param timeStamp 时间戳
-     * @param DockingSecret 设备密钥
-     * @return
+     * 生成32位随机字符串
+     * @return nonceStr
      */
-    public static String GetSign(String DeviceID,String DeviceName,String DockingDeviceID,String GUID,String nouceStr,String timeStamp,String DockingSecret){
-        //最终用以保存签名结果的字符串
+    public static String GetNoncestr(){
+        String nonceStr = UUID.randomUUID().toString().trim().replaceAll("-", "");
+        return nonceStr;
+    }
+
+
+
+
+
+    public static String GetSign(String stringA, String DockingSecret){
         String Sign = "";
-        String stringA = "DeviceID="+DeviceID+"&DeviceName="+DeviceName+"&DockingDeviceID="+DockingDeviceID+"&GUID="+GUID+"&nonceStr="+nouceStr+"&timeStamp="+timeStamp;
         //拼接字符
         String StringSignTemp = stringA +"&"+ DockingSecret;
-        //字符内容全部转为小写
         StringSignTemp = StringSignTemp.toLowerCase();
         //md5加密
         Sign =MD5.MD5(StringSignTemp);

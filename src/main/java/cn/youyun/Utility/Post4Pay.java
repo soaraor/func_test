@@ -39,8 +39,8 @@ public class Post4Pay {
             String ResponseString = new String(byteIS, "UTF-8");
             if ((ResponseString == null) || ("".equals(ResponseString.trim()))) {
                 System.out.println("= = = = =返回结果为空= = = = =");
-            }//这里不加else吗？
-            System.out.println("响应参数："+ ResponseString);
+            }
+            else System.out.println("响应参数："+ ResponseString);
             return ResponseString;
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,14 +48,16 @@ public class Post4Pay {
         } finally {
             try {
                 inputStream.close();
-            }catch (Exception e) {
-                return "【关闭inputStream流失败】";
+            }catch (Exception e1) {
+                e1.printStackTrace();
             }
+            /**
             try {
                 byteArrayOutputStream.close();
-            } catch (Exception ex) {
-                return "【关闭byteArrayOutputStream流失败】";
+            } catch (Exception e2) {
+                e2.printStackTrace();
             }
+             */
         }
     }
 }
