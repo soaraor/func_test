@@ -15,13 +15,13 @@ public class APIList {
      * @param GUID 商家唯一标识
      * @param nonceStr 随机字符串
      * @param timestamp 时间戳
-     * @return 注册响应
+     * @return
      */
     public String RegisterDevice(String DeviceID, String DeviceName, String DockingDeviceID, String GUID, String nonceStr, String timestamp,String DockingSecret){
         //请求地址
         String postfix = "/api/RegisterDevice/";
         String RequestURL = ApiDomain + postfix;
-        //签名
+        //设备注册签名逻辑
         String stringA ="DeviceID="+DeviceID+"&DeviceName="+DeviceName+"&DockingDeviceID="+DockingDeviceID+"&GUID="+GUID+"&nonceStr="+nonceStr+"&timestamp="+timestamp;
         String sign = DataUtil.GetSign(stringA,DockingSecret);
          //请求响应
@@ -47,7 +47,7 @@ public class APIList {
         //请求地址
         String postfix = "/api/SignInOrOut/";
         String RequestURL = ApiDomain + postfix;
-        //签名
+        //签到/签退签名逻辑
         String stringA ="DeviceID="+DeviceID+"&devicesecret="+devicesecret+"&DockingDeviceID="+DockingDeviceID+"&LogID="+LogID+"&nonceStr="+nonceStr+"&SitePwd="+SitePwd+"&SiteUserID="+SiteUserID+"&timestamp="+timestamp;
         String sign = DataUtil.GetSign(stringA,DockingSecret);
         //请求响应
@@ -63,16 +63,21 @@ public class APIList {
      * @param DockingDeviceID 对接注册设备标识开头
      * @param nonceStr 随机字符串
      * @param PayMoney 收款金额
-     * @param ScanpayNo 扫描的付款码
+     * @param ScanpayNo 付款码
      * @param SiteUserID 收银员ID
      * @param timestamp 时间戳
-     * @param Sign 签名
+     * @param DockingSecret 对接秘钥
      * @return
      */
-    public String AcquirePay(String DeviceID, String devicesecret, String DockingDeviceID, String nonceStr, BigDecimal PayMoney, String ScanpayNo, String SiteUserID, String timestamp, String Sign){
+    public String AcquirePay(String DeviceID, String devicesecret, String DockingDeviceID, String nonceStr, BigDecimal PayMoney, String ScanpayNo, int SiteUserID, String timestamp, String DockingSecret){
+        //请求地址
         String postfix = "/api/AcquirePay/";
         String RequestURL = ApiDomain + postfix;
-        String RequestStr ="deviceid="+DeviceID+"&devicesecret="+devicesecret+"&DockingDeviceID="+DockingDeviceID+"&nonceStr="+nonceStr+"&paymoney="+PayMoney+"&scanpayno="+ScanpayNo+"&siteUserID="+SiteUserID+"&timestamp="+timestamp+"&sign="+Sign;
+        //扫码收款签名逻辑
+        String stringA ="DeviceID="+DeviceID+"&devicesecret="+devicesecret+"&DockingDeviceID="+DockingDeviceID+"&nonceStr="+nonceStr+"&PayMoney="+PayMoney+"&ScanpayNo="+ScanpayNo+"&SiteUserID="+SiteUserID+"&timestamp="+timestamp;
+        String sign = DataUtil.GetSign(stringA,DockingSecret);
+        //请求响应
+        String RequestStr ="deviceid="+DeviceID+"&devicesecret="+devicesecret+"&DockingDeviceID="+DockingDeviceID+"&nonceStr="+nonceStr+"&paymoney="+PayMoney+"&scanpayno="+ScanpayNo+"&siteUserID="+SiteUserID+"&timestamp="+timestamp+"&sign="+sign;
         String result = Post4Pay.HttpPost(RequestStr,RequestURL);
         return result;
     }
