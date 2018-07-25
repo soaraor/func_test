@@ -81,4 +81,17 @@ public class APIList {
         String result = Post4Pay.HttpPost(RequestStr,RequestURL);
         return result;
     }
+
+    public String QrcodePay(String DeviceID, String devicesecret, String DockingDeviceID, String nonceStr, BigDecimal PayMoney,String PayType, String DockingOrderID, int SiteUserID, String timestamp, String DockingSecret){
+        //请求地址
+        String postfix = "/api/QrcodePay/";
+        String RequestURL = ApiDomain + postfix;
+        //扫码收款签名逻辑
+        String stringA ="DeviceID="+DeviceID+"&devicesecret="+devicesecret+"&DockingDeviceID="+DockingDeviceID+"&DockingOrderID="+DockingOrderID+"&nonceStr="+nonceStr+"&PayMoney="+PayMoney+"&PayType="+PayType+"&SiteUserID="+SiteUserID+"&timestamp="+timestamp;
+        String sign = DataUtil.GetSign(stringA,DockingSecret);
+        //请求响应
+        String RequestStr ="deviceid="+DeviceID+"&devicesecret="+devicesecret+"&DockingDeviceID="+DockingDeviceID+"&nonceStr="+nonceStr+"&paymoney="+PayMoney+"&PayType="+PayType+"&DockingOrderID="+DockingOrderID+"&siteUserID="+SiteUserID+"&timestamp="+timestamp+"&sign="+sign;
+        String result = Post4Pay.HttpPost(RequestStr,RequestURL);
+        return result;
+    }
 }
