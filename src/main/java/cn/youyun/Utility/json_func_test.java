@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.util.*;
 
-public class func_test {
+public class json_func_test {
     public static String jsonobject(int count) {//JSONObject输出格式
         JSONObject params = new JSONObject(new LinkedHashMap<String, Object>());
         Map ReOject = new LinkedHashMap();

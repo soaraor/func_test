@@ -34,7 +34,7 @@ public class APIList {
      * SignInOrOut：签到/签退
      * @param DeviceID 设备标识
      * @param devicesecret 设备秘钥
-     * @param SiteUserID 收银员ID
+     * @param SiteUserID 收银员账号
      * @param SitePwd 收银员密码
      * @param LogID 签到ID
      * @param DockingDeviceID 对接注册设备标识开头
@@ -64,7 +64,7 @@ public class APIList {
      * @param nonceStr 随机字符串
      * @param PayMoney 收款金额
      * @param ScanpayNo 付款码
-     * @param SiteUserID 收银员ID
+     * @param SiteUserID 收银员账号
      * @param timestamp 时间戳
      * @param DockingSecret 对接秘钥
      * @return
@@ -82,6 +82,20 @@ public class APIList {
         return result;
     }
 
+    /**
+     * QrcodePay：二维码收款
+     * @param DeviceID 设备标识
+     * @param devicesecret 设备秘钥
+     * @param DockingDeviceID 对接注册设备标识开头
+     * @param nonceStr 随机字符串
+     * @param PayMoney 付款金额
+     * @param PayType 支付类型
+     * @param DockingOrderID 第三方订单号
+     * @param SiteUserID 收银员账号
+     * @param timestamp 时间戳
+     * @param DockingSecret 对接秘钥
+     * @return
+     */
     public String QrcodePay(String DeviceID, String devicesecret, String DockingDeviceID, String nonceStr, BigDecimal PayMoney,String PayType, String DockingOrderID, int SiteUserID, String timestamp, String DockingSecret){
         //请求地址
         String postfix = "/api/QrcodePay/";
