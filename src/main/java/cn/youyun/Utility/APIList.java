@@ -100,7 +100,7 @@ public class APIList {
         //请求地址
         String postfix = "/api/QrcodePay/";
         String RequestURL = ApiDomain + postfix;
-        //扫码收款签名逻辑
+        //二维码收款签名逻辑
         String stringA ="DeviceID="+DeviceID+"&devicesecret="+devicesecret+"&DockingDeviceID="+DockingDeviceID+"&DockingOrderID="+DockingOrderID+"&nonceStr="+nonceStr+"&PayMoney="+PayMoney+"&PayType="+PayType+"&SiteUserID="+SiteUserID+"&timestamp="+timestamp;
         String sign = DataUtil.GetSign(stringA,DockingSecret);
         //请求响应
@@ -108,4 +108,29 @@ public class APIList {
         String result = Post4Pay.HttpPost(RequestStr,RequestURL);
         return result;
     }
+
+    /**
+     * GetPayState：获取交易订单支付状态
+     * @param DockingDeviceID 对接注册设备标识开头
+     * @param DeviceID 设备标识
+     * @param devicesecret 设备秘钥
+     * @param DockingOrderID 第三方订单号
+     * @param timestamp 时间戳
+     * @param nonceStr 随机字符串
+     * @param DockingSecret 对接秘钥
+     * @return
+     */
+    public String GetPayState(String DockingDeviceID,String DeviceID,String devicesecret,String DockingOrderID,String timestamp,String nonceStr,String DockingSecret){
+        //请求地址
+        String postfix = "/api/GetPayState/";
+        String RequestURL = ApiDomain + postfix;
+        //获取交易订单支付状态签名逻辑
+        String stringA ="DeviceID="+DeviceID+"&devicesecret="+devicesecret+"&DockingDeviceID="+DockingDeviceID+"&DockingOrderID="+DockingOrderID+"&nonceStr="+nonceStr+"&timestamp="+timestamp;
+        String sign = DataUtil.GetSign(stringA,DockingSecret);
+        //请求响应
+        String RequestStr ="deviceid="+DeviceID+"&devicesecret="+devicesecret+"&DockingDeviceID="+DockingDeviceID+"&nonceStr="+nonceStr+"&DockingOrderID="+DockingOrderID+"&timestamp="+timestamp+"&sign="+sign;
+        String result = Post4Pay.HttpPost(RequestStr,RequestURL);
+        return result;
+    }
+
 }

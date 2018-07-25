@@ -1,14 +1,13 @@
 package cn.youyun.Utility;
 
 import java.util.Calendar;
-import java.util.Scanner;
 import java.util.UUID;
 
 public class DataUtil {
     /**
-     * 由DockingDeviceID, UserStr得到DeviceID
-     * @param DockingDeviceID
-     * @param UserStr
+     * 获取DeviceID
+     * @param DockingDeviceID 对接注册设备标识开头
+     * @param UserStr 用户自定义字段
      * @return DeviceID
      */
     public static String GetDeviceID(String DockingDeviceID,String UserStr){
@@ -37,10 +36,12 @@ public class DataUtil {
         return nonceStr;
     }
 
-
-
-
-
+    /**
+     * 获取签名
+     * @param stringA 非空参数字符串
+     * @param DockingSecret 对接秘钥
+     * @return Sign
+     */
     public static String GetSign(String stringA, String DockingSecret){
         String Sign = "";
         //拼接字符
