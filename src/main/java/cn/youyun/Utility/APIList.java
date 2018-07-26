@@ -360,13 +360,13 @@ public class APIList {//本部分是所有开放web api的具体实现逻辑
 
     /**
      * DownloadBill：13.对账单
-     * @param DockingDeviceID
-     * @param DeviceID
-     * @param devicesecret
-     * @param timestamp
-     * @param nonceStr
-     * @param TradeDate
-     * @param DockingSecret
+     * @param DockingDeviceID 对接注册设备标识开头
+     * @param DeviceID 设备标识
+     * @param devicesecret 设备秘钥
+     * @param timestamp 时间戳
+     * @param nonceStr 随机字符串
+     * @param TradeDate 交易状态
+     * @param DockingSecret 对接秘钥
      * @return success,Msg,ReObj
      */
     public String DownloadBill(String DockingDeviceID,String DeviceID,String devicesecret,String timestamp,String nonceStr,String TradeDate,String DockingSecret){
@@ -379,6 +379,33 @@ public class APIList {//本部分是所有开放web api的具体实现逻辑
             String sign = DataUtil.GetSign(stringA,DockingSecret);
             //请求响应
             String RequestStr ="deviceid="+DeviceID+"&devicesecret="+devicesecret+"&DockingDeviceID="+DockingDeviceID+"&nonceStr="+nonceStr+"&timestamp="+timestamp+"&TradeDate="+TradeDate+"&sign="+sign;
+            String result = Post4Pay.HttpPost(RequestStr,RequestURL);
+            return result;
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    /**
+     * AsynchronInform：14.订单异步通知签名
+     * @param OrderID 交易订单号
+     * @param OrderMoney 订单金额
+     * @param PayTime 支付时间
+     * @param OrderState 订单状态
+     * @param PayType 支付类型
+     * @param timestamp 时间戳
+     * @param nonceStr 随机字符串
+     * @param DockingSecret 对接秘钥
+     * @param RequestURL 接口地址
+     * @return success
+     */
+    public String AsynchronInform(String OrderID,BigDecimal OrderMoney,String PayTime,String OrderState,String PayType,String timestamp,String nonceStr,String DockingSecret,String RequestURL){
+        try {
+            //订单异步通知签名逻辑
+            String stringA ="&nonceStr="+nonceStr+"OrderID="+OrderID+"&OrderMoney="+OrderMoney+"&OrderState="+OrderState+"&PayTime="+PayTime+"&PayType="+PayType+"&timestamp="+timestamp;//ascii序
+            String sign = DataUtil.GetSign(stringA,DockingSecret);
+            //请求响应
+            String RequestStr ="&nonceStr="+nonceStr+"OrderID="+OrderID+"&OrderMoney="+OrderMoney+"&OrderState="+OrderState+"&PayTime="+PayTime+"&PayType="+PayType+"&timestamp="+timestamp+"&sign="+sign;
             String result = Post4Pay.HttpPost(RequestStr,RequestURL);
             return result;
         }catch (Exception e){

@@ -3,50 +3,54 @@ package cn.youyun.Utility;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-public class Main {//本部分实现了所有开放接口的请求与响应
+public class Main {//本部分实现所有开放接口的请求与响应
     public static void main(String[] args) {
         String domain = "http://test.api.docking.aduer.com";//接口请求域
         APIList ApiInstance = new APIList(domain);
 
         Scanner scanner = new Scanner(System.in);//定义键盘读取器
 
-        //读入DockingDeviceID
-        String DockingDeviceID = "1aduer";
-        //System.out.println("请输入对接注册设备标识开头DockingDeviceID（回车键结束）：");
-        //String DockingDeviceID = scanner.next();
+        /**
+         * DockingDeviceID,UserStr,DeviceName,GUID,DockingSecret
+         * 以上几个全局变量的读取，可以在第一次手动键入得到设备秘钥devicesecret后，将几个全局变量赋值常量，并将scanner读值语句注释化，简化后续操作
+         */
 
-        //获取DeviceID
-        String UserStr ="1000000001";
-        //System.out.println("请在下一行输入自定义字段UserStr（回车键结束）：");
-        //String UserStr = scanner.next();
+        //获取对接注册设备标识开头
+        System.out.println("请输入对接注册设备标识开头DockingDeviceID（回车键结束）：");
+        String DockingDeviceID = scanner.next();
+        //String DockingDeviceID = "1aduer";
+
+        //获取设备标识
+        System.out.println("请在下一行输入自定义字段UserStr（回车键结束）：");
+        String UserStr = scanner.next();
+        //String UserStr ="1995102944";
         String DeviceID = DataUtil.GetDeviceID(DockingDeviceID,UserStr);
 
-        //读入DeviceName
-        String DeviceName ="santos";
-        //System.out.println("请输入设备名称DeviceName（回车键结束）：");
-        //String DeviceName = scanner.next();
+        //获取设备名称
+        System.out.println("请输入设备名称DeviceName（回车键结束）：");
+        String DeviceName = scanner.next();
+        //String DeviceName ="youyun";
 
-        //读入GUID
-        String GUID = "kveb7WKHct";
-        //System.out.println("请输入商家唯一标识GUID（回车键结束）：");
-        //String GUID = scanner.next();
+        //获取商家唯一标识
+        System.out.println("请输入商家唯一标识GUID（回车键结束）：");
+        String GUID = scanner.next();
+        //String GUID = "kveb7WKHct";
 
-        //获取nonceStr
+        //获取随机字符串
         String nonceStr = DataUtil.GetNoncestr();
 
         //获取时间戳
         String timestamp = DataUtil.GetTimestamp();
 
-        //读入对接秘钥
-        String DockingSecret = "753951";
-        //System.out.println("请输入对接秘钥DockingSecret（回车键结束）：");
-        //String DockingSecret = scanner.next();
+        //获取对接秘钥
+        System.out.println("请输入对接秘钥DockingSecret（回车键结束）：");
+        String DockingSecret = scanner.next();
+        //String DockingSecret = "753951";
 
         System.out.println("= = = = = = = = = = == = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 全 = = 局 = = 变 = = 量 = = 输 = = 入 = = 结 = = 束 = = = = = = = = = = == = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
 
-        //设备注册
+        //设备注册（后续看一下能不能弄一个判断有没有注册过的判断嵌套结构，不用每次输入devicesecret）
         String HasRigisterOrNot = "";
-
 
         //测试web api接口
         System.out.println("接口选项：1.设备注册；2.签到/签退；3.扫码收款；4.二维码收款；5.获取交易订单支付状态；6.获取成功订单明细；7.退款；8.卡券核销；9.聚合二维码收款；10.wap收款；11.订单关闭；12.口碑单品卡券核销；13.对账单；14.订单异步通知");
@@ -56,12 +60,12 @@ public class Main {//本部分实现了所有开放接口的请求与响应
             case (1):
                 //调用设备注册接口
                 ApiInstance.RegisterDevice(DeviceID,DeviceName,DockingDeviceID,GUID,nonceStr,timestamp,DockingSecret);
-                System.out.println("提示：请妥善备份设备注册返回的参数devicesecret，后续接口需其参与。");break;
+                System.out.println(">>>>>>>>>>>>>>提示：请妥善备份设备注册返回的参数devicesecret，后续接口需其参与。<<<<<<<<<<<<<<");break;
             case (2):{
                 //设备秘钥devicesecret
                 System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
                 String devicesecret = scanner.next();
-                // 登录账号SiteUserID
+                //登录账号SiteUserID
                 System.out.println("请输入收银员账号SiteUserID（回车键结束）");
                 int SiteUserID = scanner.nextInt();
                 //登陆密码SitePwd
@@ -192,7 +196,6 @@ public class Main {//本部分实现了所有开放接口的请求与响应
                 //支付类型PayType
                 System.out.println("请输入支付类型PayType：wx-微信支付；ali-支付宝（回车键结束）");
                 String PayType = scanner.next();
-
                 //调用wap支付接口
                 ApiInstance.UnifiedOrder(DockingDeviceID,DeviceID,devicesecret,timestamp,nonceStr,DockingOrderID,SiteUserID,PayType,PayMoney,DockingSecret);break;
             }
@@ -229,11 +232,30 @@ public class Main {//本部分实现了所有开放接口的请求与响应
                 //调用对账单接口
                 ApiInstance.DownloadBill(DockingDeviceID,DeviceID,devicesecret,timestamp,nonceStr,TradeDate,DockingSecret);break;
             }
-
+            case (14):{
+                //请求域名RequestURL
+                System.out.println("请输入请求域名RequestURL（回车键结束）");
+                String RequestURL = scanner.next();
+                //交易订单号OrderID
+                System.out.println("请输入交易订单号OrderID（回车键结束）");
+                String OrderID = scanner.next();
+                //订单金额OrderMoney
+                System.out.println("请输入订单金额OrderMoney（回车键结束）");
+                BigDecimal OrderMoney = scanner.nextBigDecimal();
+                //支付时间PayTime
+                System.out.println("请输入支付时间PayTime，形如20180726（回车键结束）");
+                String PayTime = scanner.next();
+                //订单状态OrderState
+                System.out.println("请输入订单状态OrderState：SUCCESS-支付成功；REFUND-已退款；NOTPAY-未支付；CLOSED-已关闭（回车键结束）");
+                String OrderState = scanner.next();
+                //支付类型PayType
+                System.out.println("请输入支付类型PayType：wx-微信支付；ali-支付宝;other-其他（回车键结束）");
+                String PayType = scanner.next();
+                //调用订单异步通知接口
+                ApiInstance.AsynchronInform(OrderID,OrderMoney,PayTime,OrderState,PayType,timestamp,nonceStr,DockingSecret,RequestURL);break;
+            }
             default: System.out.println("您输入接口选项不存在，请重新确认后输入");break;
         }
-
-        System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = == = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
-
+        System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = == = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
     }
 }
