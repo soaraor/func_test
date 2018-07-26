@@ -3,7 +3,7 @@ package cn.youyun.Utility;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-public class main {
+public class Main {//本部分实现了所有开放接口的请求与响应
     public static void main(String[] args) {
         String domain = "http://test.api.docking.aduer.com";//接口请求域
         APIList ApiInstance = new APIList(domain);
@@ -85,6 +85,9 @@ public class main {
                 //设备秘钥devicesecret
                 System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
                 String devicesecret = scanner.next();
+                // 登录账号SiteUserID
+                System.out.println("请输入收银员账号SiteUserID（回车键结束）");
+                int SiteUserID = scanner.nextInt();
                 //收款金额PayMoney
                 System.out.println("请输入收款金额PayMoney（回车键结束）");
                 BigDecimal PayMoney = scanner.nextBigDecimal();
@@ -94,9 +97,6 @@ public class main {
                 //第三方订单号DockingOrderID
                 System.out.println("请输入第三方订单号DockingOrderID（回车键结束）");
                 String DockingOrderID = scanner.next();
-                // 登录账号SiteUserID
-                System.out.println("请输入收银员账号SiteUserID（回车键结束）");
-                int SiteUserID = scanner.nextInt();
                 //调用二维码收款接口
                 ApiInstance.QrcodePay(DeviceID,devicesecret,DockingDeviceID,nonceStr,PayMoney,PayType,DockingOrderID,SiteUserID,timestamp,DockingSecret);break;
             }
@@ -138,6 +138,87 @@ public class main {
                 String Operatepass = scanner.next();
                 //调用退款接口
                 ApiInstance.Refund(DockingDeviceID,DeviceID,devicesecret,OrderID,timestamp,nonceStr,DockingSecret,RefundOrderID,Remoney,Operatepass);break;
+            }
+            case (8):{
+                //设备秘钥devicesecret
+                System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
+                String devicesecret = scanner.next();
+                //卡券号Scanticketno
+                System.out.println("请输入卡券号Scanticketno（回车键结束）");
+                String Scanticketno = scanner.next();
+                //核销金额Paymoney
+                System.out.println("请输入核销金额Paymoney（回车键结束）");
+                BigDecimal Discount = scanner.nextBigDecimal();
+                //调用卡券核销接口
+                ApiInstance.TicketUse(DockingDeviceID,DeviceID,devicesecret,timestamp,nonceStr,Scanticketno,Discount,DockingSecret);break;
+            }
+            case (9):{
+                //设备秘钥devicesecret
+                System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
+                String devicesecret = scanner.next();
+                // 登录账号SiteUserID
+                System.out.println("请输入收银员账号SiteUserID（回车键结束）");
+                int SiteUserID = scanner.nextInt();
+                //收款金额PayMoney
+                System.out.println("请输入收款金额PayMoney（回车键结束）");
+                BigDecimal PayMoney = scanner.nextBigDecimal();
+                //第三方订单号DockingOrderID
+                System.out.println("请输入第三方订单号DockingOrderID（回车键结束）");
+                String DockingOrderID = scanner.next();
+                //调用聚合支付接口
+                ApiInstance.AggregateOrder(DockingDeviceID,DeviceID,devicesecret,timestamp,nonceStr,DockingOrderID,SiteUserID,PayMoney,DockingSecret);break;
+            }
+            case (10):{
+                //设备秘钥devicesecret
+                System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
+                String devicesecret = scanner.next();
+                // 登录账号SiteUserID
+                System.out.println("请输入收银员账号SiteUserID（回车键结束）");
+                int SiteUserID = scanner.nextInt();
+                //收款金额PayMoney
+                System.out.println("请输入收款金额PayMoney（回车键结束）");
+                BigDecimal PayMoney = scanner.nextBigDecimal();
+                //支付类型PayType
+                System.out.println("请输入支付类型PayType：WX.微信支付；ALI.支付宝（回车键结束）");
+                String PayType = scanner.next();
+                //第三方订单号DockingOrderID
+                System.out.println("请输入第三方订单号DockingOrderID（回车键结束）");
+                String DockingOrderID = scanner.next();
+                //调用wap支付接口
+                ApiInstance.UnifiedOrder(DockingDeviceID,DeviceID,devicesecret,timestamp,nonceStr,DockingOrderID,SiteUserID,PayType,PayMoney,DockingSecret);break;
+            }
+            case (11):{
+                //设备秘钥devicesecret
+                System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
+                String devicesecret = scanner.next();
+                // 登录账号SiteUserID
+                System.out.println("请输入收银员账号SiteUserID（回车键结束）");
+                int SiteUserID = scanner.nextInt();
+                //交易订单号OrderID
+                System.out.println("请输入交易订单号OrderID（回车键结束）");
+                String OrderID = scanner.next();
+                //调用订单关闭接口
+                ApiInstance.CloseOrder(DockingDeviceID,DeviceID,devicesecret,timestamp,nonceStr, OrderID,SiteUserID,DockingSecret);break;
+            }
+            case (12):{
+                //设备秘钥devicesecret
+                System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
+                String devicesecret = scanner.next();
+                //卡券号Scanticketno
+                System.out.println("请输入卡券号Scanticketno（回车键结束）");
+                String Scanticketno = scanner.next();
+                //调用口碑单品卡券核销接口
+                ApiInstance.UseKouBeiCard(DockingDeviceID,DeviceID,devicesecret,timestamp,nonceStr,Scanticketno,DockingSecret);break;
+            }
+            case (13):{
+                //设备秘钥devicesecret
+                System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
+                String devicesecret = scanner.next();
+                //交易日期TradeDate
+                System.out.println("请输入交易日期TradeDate，形如20180726（回车键结束）");
+                String TradeDate = scanner.next();
+                //调用对账单接口
+                ApiInstance.DownloadBill(DockingDeviceID,DeviceID,devicesecret,timestamp,nonceStr,TradeDate,DockingSecret);break;
             }
 
             default: System.out.println("您输入接口选项不存在，请重新确认后输入");break;

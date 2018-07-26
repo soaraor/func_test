@@ -9,7 +9,7 @@ import java.net.URL;
 
 public class Post4Pay {
     /**
-     * 发送Http post请求
+     * Http post请求部件
      * @param xmlInfo 请求参数字符串
      * @param requestURL 请求地址
      * @return 返回信息
@@ -51,7 +51,7 @@ public class Post4Pay {
             }catch (Exception e1) {
                 e1.printStackTrace();
             }
-            /**
+            /** byteArrayOutputStream.close()抛出异常，查网上资料说是这个流关闭是伪关闭，问题弄得不太懂，但不影响使用
             try {
                 byteArrayOutputStream.close();
             } catch (Exception e2) {

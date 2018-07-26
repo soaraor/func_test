@@ -3,9 +3,9 @@ package cn.youyun.Utility;
 import java.util.Calendar;
 import java.util.UUID;
 
-public class DataUtil {
+public class DataUtil {//全局参数的处理获取方法
     /**
-     * 获取DeviceID
+     * 获取设备标识
      * @param DockingDeviceID 对接注册设备标识开头
      * @param UserStr 用户自定义字段
      * @return DeviceID
