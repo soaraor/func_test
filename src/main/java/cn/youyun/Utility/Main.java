@@ -16,25 +16,25 @@ public class Main {//本部分实现所有开放接口的请求与响应
          */
 
         //获取对接注册设备标识开头
-        System.out.println("请输入对接注册设备标识开头DockingDeviceID（回车键结束）：");
-        String DockingDeviceID = scanner.next();
-        //String DockingDeviceID = "1aduer";
+        //System.out.println("请输入对接注册设备标识开头DockingDeviceID（回车键结束）：");
+        //String DockingDeviceID = scanner.next();
+        String DockingDeviceID = "1aduer";
 
         //获取设备标识
-        System.out.println("请在下一行输入自定义字段UserStr（回车键结束）：");
-        String UserStr = scanner.next();
-        //String UserStr ="1995102944";
+        //System.out.println("请在下一行输入自定义字段UserStr（回车键结束）：");
+        //String UserStr = scanner.next();
+        String UserStr ="1995102944";
         String DeviceID = DataUtil.GetDeviceID(DockingDeviceID,UserStr);
 
         //获取设备名称
-        System.out.println("请输入设备名称DeviceName（回车键结束）：");
-        String DeviceName = scanner.next();
-        //String DeviceName ="youyun";
+        //System.out.println("请输入设备名称DeviceName（回车键结束）：");
+        //String DeviceName = scanner.next();
+        String DeviceName ="xuesui";
 
         //获取商家唯一标识
-        System.out.println("请输入商家唯一标识GUID（回车键结束）：");
-        String GUID = scanner.next();
-        //String GUID = "kveb7WKHct";
+        //System.out.println("请输入商家唯一标识GUID（回车键结束）：");
+        //String GUID = scanner.next();
+        String GUID = "kveb7WKHct";
 
         //获取随机字符串
         String nonceStr = DataUtil.GetNoncestr();
@@ -43,9 +43,9 @@ public class Main {//本部分实现所有开放接口的请求与响应
         String timestamp = DataUtil.GetTimestamp();
 
         //获取对接秘钥
-        System.out.println("请输入对接秘钥DockingSecret（回车键结束）：");
-        String DockingSecret = scanner.next();
-        //String DockingSecret = "753951";
+        //System.out.println("请输入对接秘钥DockingSecret（回车键结束）：");
+        //String DockingSecret = scanner.next();
+        String DockingSecret = "753951";
 
         System.out.println("= = = = = = = = = = == = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 全 = = 局 = = 变 = = 量 = = 输 = = 入 = = 结 = = 束 = = = = = = = = = = == = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
 
@@ -66,7 +66,7 @@ public class Main {//本部分实现所有开放接口的请求与响应
                 System.out.println("请输入收银员账号SiteUserID（回车键结束）");
                 int SiteUserID = scanner.nextInt();
                 //登陆密码SitePwd
-                System.out.println("请输入收银员账号SitePwd（回车键结束）");
+                System.out.println("请输入收银员登陆密码SitePwd（回车键结束）");
                 String SitePwd = scanner.next();
                 //操作类型LogID
                 System.out.println("请输入操作：0-签到；具体LogID-签退（回车键结束）");

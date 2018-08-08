@@ -14,7 +14,7 @@ public class Post4Pay {
      * @param requestURL 请求地址
      * @return 返回信息
      */
-    public static String HttpPost(String xmlInfo, String requestURL) {
+    public static String HttpPost(String xmlInfo, String requestURL) {  //URLconnection实现
         System.out.println("请求参数:" + xmlInfo);
         byte[] xmlData = xmlInfo.getBytes();
         InputStream inputStream = null;
@@ -38,7 +38,7 @@ public class Post4Pay {
             byte[] byteIS = IOUtils.toByteArray(inputStream);
             String ResponseString = new String(byteIS, "UTF-8");
             if ((ResponseString == null) || ("".equals(ResponseString.trim()))) {
-                System.out.println("= = = = =返回结果为空= = = = =");
+                System.out.println("很遗憾，响应结果为空，请重试。");
             }
             else System.out.println("响应参数："+ ResponseString);
             return ResponseString;

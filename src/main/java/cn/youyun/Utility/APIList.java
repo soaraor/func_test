@@ -26,7 +26,7 @@ public class APIList {//本部分是所有开放web api的具体实现逻辑
             String sign = DataUtil.GetSign(stringA,DockingSecret);
             //请求响应
             String RequestStr = "deviceid="+DeviceID+"&devicename="+DeviceName+"&DockingDeviceID="+DockingDeviceID+"&guid="+GUID+"&nonceStr="+nonceStr+"&timestamp="+timestamp+"&sign="+sign;
-            String result = Post4Pay.HttpPost(RequestStr,RequestURL);//发送请求并将相应结果存进resultStr字符串
+            String result = HttpProxy.HttpPost(RequestStr,RequestURL);//发送请求并将相应结果存进resultStr字符串
             return result;
         }catch (Exception e){
             return null;
@@ -86,7 +86,7 @@ public class APIList {//本部分是所有开放web api的具体实现逻辑
             String sign = DataUtil.GetSign(stringA,DockingSecret);
             //请求响应
             String RequestStr ="deviceid="+DeviceID+"&devicesecret="+devicesecret+"&DockingDeviceID="+DockingDeviceID+"&nonceStr="+nonceStr+"&paymoney="+PayMoney+"&scanpayno="+ScanpayNo+"&siteUserID="+SiteUserID+"&timestamp="+timestamp+"&sign="+sign;
-            String result = Post4Pay.HttpPost(RequestStr,RequestURL);
+            String result = HttpProxy.HttpPost(RequestStr,RequestURL);
             return result;
         }catch (Exception e){
             return null;
@@ -387,7 +387,7 @@ public class APIList {//本部分是所有开放web api的具体实现逻辑
     }
 
     /**
-     * AsynchronInform：14.订单异步通知签名
+     * AsynchronInform：14.订单异步通知
      * @param OrderID 交易订单号
      * @param OrderMoney 订单金额
      * @param PayTime 支付时间
