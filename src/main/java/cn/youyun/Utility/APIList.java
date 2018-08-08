@@ -117,7 +117,7 @@ public class APIList {//本部分是所有开放web api的具体实现逻辑
             String sign = DataUtil.GetSign(stringA,DockingSecret);
             //请求响应
             String RequestStr ="deviceid="+DeviceID+"&devicesecret="+devicesecret+"&DockingDeviceID="+DockingDeviceID+"&nonceStr="+nonceStr+"&paymoney="+Paymoney+"&PayType="+PayType+"&DockingOrderID="+DockingOrderID+"&siteUserID="+SiteUserID+"&timestamp="+timestamp+"&sign="+sign;
-            String result = Post4Pay.HttpPost(RequestStr,RequestURL);
+            String result = HttpProxy.HttpPost(RequestStr,RequestURL);
             return result;
         }catch (Exception e){
             return null;
@@ -145,7 +145,7 @@ public class APIList {//本部分是所有开放web api的具体实现逻辑
             String sign = DataUtil.GetSign(stringA,DockingSecret);
             //请求响应
             String RequestStr ="deviceid="+DeviceID+"&devicesecret="+devicesecret+"&DockingDeviceID="+DockingDeviceID+"&nonceStr="+nonceStr+"&OrderID="+OrderID+"&timestamp="+timestamp+"&sign="+sign;
-            String result = Post4Pay.HttpPost(RequestStr,RequestURL);
+            String result = HttpProxy.HttpPost(RequestStr,RequestURL);
             return result;
         }catch (Exception e){
             return null;
@@ -173,7 +173,7 @@ public class APIList {//本部分是所有开放web api的具体实现逻辑
             String sign = DataUtil.GetSign(stringA,DockingSecret);
             //请求响应
             String RequestStr ="deviceid="+DeviceID+"&devicesecret="+devicesecret+"&DockingDeviceID="+DockingDeviceID+"&nonceStr="+nonceStr+"&OrderID="+OrderID+"&timestamp="+timestamp+"&sign="+sign;
-            String result = Post4Pay.HttpPost(RequestStr,RequestURL);
+            String result = HttpProxy.HttpPost(RequestStr,RequestURL);
             return result;
         }catch (Exception e){
             return null;
@@ -204,7 +204,7 @@ public class APIList {//本部分是所有开放web api的具体实现逻辑
             String sign = DataUtil.GetSign(stringA,DockingSecret);
             //请求响应
             String RequestStr ="deviceid="+DeviceID+"&devicesecret="+devicesecret+"&DockingDeviceID="+DockingDeviceID+"&nonceStr="+nonceStr+"&OrderID="+OrderID+"&timestamp="+timestamp+"&RefundOrderID="+RefundOrderID+"&Remoney="+Remoney+"&Operatepass="+Operatepass+"&sign="+sign;
-            String result = Post4Pay.HttpPost(RequestStr,RequestURL);
+            String result = HttpProxy.HttpPost(RequestStr,RequestURL);
             return result;
         }catch (Exception e){
             return null;
