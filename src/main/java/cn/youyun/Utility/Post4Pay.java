@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.net.URLConnection;
 import java.net.URL;
 
+/*此方法类与HttpProxy类功能完全相同，版本较老，HttpProxy不可用时将HttpProxy替换成Post4Pay即可*/
 public class Post4Pay {
     /**
      * Http post请求部件

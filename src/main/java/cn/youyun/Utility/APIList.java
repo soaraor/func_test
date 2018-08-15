@@ -494,11 +494,77 @@ public class APIList {//本部分是所有开放web api的具体实现逻辑
         }
     }
 
+    /**
+     * AppletPay：15.小程序支付
+     * @param AppID 小程序AppID
+     * @param DeviceID 设备标识
+     * @param DeviceSecret 设备秘钥
+     * @param DockingDeviceID 对接注册设备标识开头
+     * @param DockingOrderID 交易订单号
+     * @param NonceStr 随机字符串
+     * @param OpenID 消费者信息
+     * @param PayMoney 支付金额
+     * @param SiteUserID 收银员账号
+     * @param TimeStamp 时间戳
+     * @param DockingSecret 对接秘钥
+     * @return success,Msg,ReObj
+     */
+    public String AppletPay(String AppID,String DeviceID,String DeviceSecret,String DockingDeviceID,String DockingOrderID,String NonceStr,String OpenID,BigDecimal PayMoney, int SiteUserID, String TimeStamp,String DockingSecret){
+        //小程序支付请求地址
+        String postfix = "/api/AppletPay/";
+        String RequestURL = ApiDomain + postfix;
+        String operarion = "AppletPay";
+
+        LinkedList<String> ParamList = new LinkedList<>();
+        ParamList.add(AppID);
+        ParamList.add(DeviceID);
+        ParamList.add(DeviceSecret);
+        ParamList.add(DockingDeviceID);
+        ParamList.add(DockingOrderID);
+        ParamList.add(NonceStr);
+        ParamList.add(OpenID);
+        ParamList.add(String.valueOf(PayMoney));
+        ParamList.add(String.valueOf(SiteUserID));
+        ParamList.add(TimeStamp);
+
+        try {
+            return ResponseResult(ParamList,operarion,DockingSecret,RequestURL);
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    /**
+     * 调用接口且接收响应（公共部分）
+     * @param ParamList 参数值顺序表
+     * @param operarion 接口名
+     * @param DockingSecret 对接秘钥
+     * @param RequestURL 接口请求地址
+     * @return 响应结果
+     */
+    public static String ResponseResult(LinkedList ParamList, String operarion, String DockingSecret, String RequestURL){
+        //签名逻辑
+        String stringA = stringA(ParamList,operarion);//字母序
+        String sign = DataUtil.GetSign(stringA,DockingSecret);
+        //请求响应
+        String RequestStr =stringA +"&sign="+sign;
+        String result = null;
+        try {
+            result = HttpProxy.HttpPost(RequestStr,RequestURL);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+    *以下stringA、GetkeyvalueTreemap、GetkeyList、GetvalueList四个方法，共同实现了“读取参数名-排ASCII序-拼接saringA”了
+    * */
 
     /*拼接stringA*/
     public static String stringA(LinkedList<String> ParamList, String operarion){
         String stringA="";
-        TreeMap<String,String> resultMap = Method4test(ParamList, operarion);
+        TreeMap<String,String> resultMap = GetkeyvalueTreemap(ParamList, operarion);
 
         Iterator<String> iterator =  resultMap.keySet().iterator();
         while (iterator.hasNext()) {
@@ -533,6 +599,7 @@ public class APIList {//本部分是所有开放web api的具体实现逻辑
                 case ("UseKouBeiCard"): method = clazz.getMethod("UseKouBeiCard", String.class, String.class, String.class, String.class, String.class, String.class, String.class);break;
                 case ("DownloadBill"): method = clazz.getMethod("DownloadBill", String.class, String.class, String.class, String.class, String.class, String.class, String.class);break;
                 case ("AsynchronInform"): method = clazz.getMethod("AsynchronInform", String.class, String.class, BigDecimal.class, String.class, String.class, String.class, String.class, String.class);break;
+                case ("AppletPay"): method = clazz.getMethod("AppletPay", String.class, String.class, String.class, String.class, String.class, String.class, String.class, BigDecimal.class, int.class, String.class, String.class);break;
                 default: System.out.println("operation错误");break;
             }
 
@@ -549,15 +616,15 @@ public class APIList {//本部分是所有开放web api的具体实现逻辑
         return paramsName;
     }
 
-    /*获取值列*/
+    /*获取值列（这个参数数量各异，无法统一，选择在每个接口具体测试方法内实现）*/
     public static LinkedList<String> GetvalueList(LinkedList<String> ParamList){
         LinkedList<String> value = new LinkedList<>(ParamList);                                  //一开始写LinkedList<String> value = null直接报错，真是个憨憨
         return value;
     }
 
     /*获取键值map*/
-    public static TreeMap<String, String> Method4test(LinkedList<String> ParamList, String operarion){    //AKA GetkeyvalueTreemap
-        TreeMap<String, String> KeyValueTreemap= new TreeMap<>();                                                                                       //最终的“参数名-参数值”map
+    public static TreeMap<String, String> GetkeyvalueTreemap(LinkedList<String> ParamList, String operarion){    //AKA GetkeyvalueTreemap
+        TreeMap<String, String> KeyValueTreemap= new TreeMap<>();                                               //treemap是红黑树，自带ascii排序功能                                                                                   //最终的“参数名-参数值”map
         LinkedList<String> keylist = GetkeyList(operarion);                                                                                                                    //name→email→count
         LinkedList<String> valuelist = GetvalueList(ParamList);                                                 //liangsi→soaraor@163.com→19961110
         for (int i = 0; i < keylist.size(); i++) {
@@ -566,19 +633,5 @@ public class APIList {//本部分是所有开放web api的具体实现逻辑
         return KeyValueTreemap;
     }
 
-    /*调用接口且接收响应的公共部分*/
-    public static String ResponseResult(LinkedList ParamList, String operarion, String DockingSecret, String RequestURL){
-        //签名逻辑
-        String stringA = stringA(ParamList,operarion);//字母序
-        String sign = DataUtil.GetSign(stringA,DockingSecret);
-        //请求响应
-        String RequestStr =stringA +"&sign="+sign;
-        String result = null;
-        try {
-            result = HttpProxy.HttpPost(RequestStr,RequestURL);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
+
 }

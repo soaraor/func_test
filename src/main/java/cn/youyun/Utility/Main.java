@@ -47,10 +47,12 @@ public class Main {//本部分实现所有开放接口的请求与响应
         //String DockingSecret = scanner.next();
         String DockingSecret = "753951";
 
-        System.out.println("= = = = = = = = = = == = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 全 = = 局 = = 变 = = 量 = = 输 = = 入 = = 结 = = 束 = = = = = = = = = = == = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
+        System.out.println(" = = = = = = = = = = = = = = = = = = = 全 = = 局 = = 变 = = 量 = = 输 = = 入 = = 结 = = 束 = = = = = = = = = = = = = = = = = = = ");
 
         //测试web api接口
-        System.out.println("接口选项：1.设备注册；2.签到/签退；3.扫码收款；4.二维码收款；5.获取交易订单支付状态；6.获取成功订单明细；7.退款；8.卡券核销；9.聚合二维码收款；10.wap收款；11.订单关闭；12.口碑单品卡券核销；13.对账单；14.订单异步通知");
+        System.out.println("接口选项：");
+        System.out.println("1.设备注册；2.签到/签退；3.扫码收款；4.二维码收款；5.获取交易订单支付状态；6.获取成功订单明细；7.退款；8.卡券核销；");
+        System.out.println("9.聚合二维码收款；10.wap收款；11.订单关闭；12.口碑单品卡券核销；13.对账单；14.订单异步通知；15.小程序支付");
         System.out.println("请选择要的测试的接口序号（回车键结束）：");
         int UserAction = scanner.nextInt();
         switch (UserAction){
@@ -72,8 +74,8 @@ public class Main {//本部分实现所有开放接口的请求与响应
                 System.out.println("请输入操作：0-签到；具体LogID-签退（回车键结束）");
                 int LogID = scanner.nextInt();
                 //调用签到/签退接口
-                ApiInstance.SignInOrOut(DeviceID,devicesecret,DockingDeviceID,LogID,nonceStr,SitePwd,SiteUserID,timestamp,DockingSecret);break;
-            }
+                ApiInstance.SignInOrOut(DeviceID,devicesecret,DockingDeviceID,LogID,nonceStr,SitePwd,SiteUserID,timestamp,DockingSecret);
+            }break;
             case (3):{
                 //设备秘钥devicesecret
                 System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
@@ -88,8 +90,8 @@ public class Main {//本部分实现所有开放接口的请求与响应
                 System.out.println("请输入付款码ScanpayNo（回车键结束）");
                 String ScanpayNo = scanner.next();
                 //调用扫码收款接口
-                ApiInstance.AcquirePay(DeviceID,devicesecret,DockingDeviceID,nonceStr,PayMoney,ScanpayNo,SiteUserID,timestamp,DockingSecret);break;
-            }
+                ApiInstance.AcquirePay(DeviceID,devicesecret,DockingDeviceID,nonceStr,PayMoney,ScanpayNo,SiteUserID,timestamp,DockingSecret);
+            }break;
             case (4):{
                 //设备秘钥devicesecret
                 System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
@@ -107,8 +109,8 @@ public class Main {//本部分实现所有开放接口的请求与响应
                 System.out.println("请输入第三方订单号DockingOrderID（回车键结束）");
                 String DockingOrderID = scanner.next();
                 //调用二维码收款接口
-                ApiInstance.QrcodePay(DeviceID,devicesecret,DockingDeviceID,DockingOrderID,nonceStr,PayMoney,PayType,SiteUserID,timestamp,DockingSecret);break;
-            }
+                ApiInstance.QrcodePay(DeviceID,devicesecret,DockingDeviceID,DockingOrderID,nonceStr,PayMoney,PayType,SiteUserID,timestamp,DockingSecret);
+            }break;
             case (5):{
                 //设备秘钥devicesecret
                 System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
@@ -117,8 +119,8 @@ public class Main {//本部分实现所有开放接口的请求与响应
                 System.out.println("请输入交易订单号OrderID（回车键结束）");
                 String OrderID = scanner.next();
                 //调用获取交易订单支付状态接口
-                ApiInstance.GetPayState(DeviceID,devicesecret,DockingDeviceID,nonceStr,OrderID,timestamp,DockingSecret);break;
-            }
+                ApiInstance.GetPayState(DeviceID,devicesecret,DockingDeviceID,nonceStr,OrderID,timestamp,DockingSecret);
+            }break;
             case (6):{
                 //设备秘钥devicesecret
                 System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
@@ -127,8 +129,8 @@ public class Main {//本部分实现所有开放接口的请求与响应
                 System.out.println("请输入交易订单号OrderID（回车键结束）");
                 String OrderID = scanner.next();
                 //调用获取成功订单明细接口
-                ApiInstance.GetPayInfo(DeviceID,devicesecret,DockingDeviceID,nonceStr,OrderID,timestamp,DockingSecret);break;
-            }
+                ApiInstance.GetPayInfo(DeviceID,devicesecret,DockingDeviceID,nonceStr,OrderID,timestamp,DockingSecret);
+            }break;
             case (7):{
                 //设备秘钥devicesecret
                 System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
@@ -146,8 +148,8 @@ public class Main {//本部分实现所有开放接口的请求与响应
                 System.out.println("请输入退款授权密码Operatepass（回车键结束）");
                 String Operatepass = scanner.next();
                 //调用退款接口
-                ApiInstance.Refund(DeviceID,devicesecret,DockingDeviceID,nonceStr,Operatepass,OrderID,RefundOrderID,Remoney,timestamp,DockingSecret);break;
-            }
+                ApiInstance.Refund(DeviceID,devicesecret,DockingDeviceID,nonceStr,Operatepass,OrderID,RefundOrderID,Remoney,timestamp,DockingSecret);
+            }break;
             case (8):{
                 //设备秘钥devicesecret
                 System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
@@ -159,8 +161,8 @@ public class Main {//本部分实现所有开放接口的请求与响应
                 System.out.println("请输入核销金额Paymoney（回车键结束）");
                 BigDecimal PayMoney = scanner.nextBigDecimal();
                 //调用卡券核销接口
-                ApiInstance.TicketUse(DeviceID,devicesecret,DockingDeviceID,nonceStr,PayMoney,Scanticketno,timestamp,DockingSecret);break;
-            }
+                ApiInstance.TicketUse(DeviceID,devicesecret,DockingDeviceID,nonceStr,PayMoney,Scanticketno,timestamp,DockingSecret);
+            }break;
             case (9):{
                 //设备秘钥devicesecret
                 System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
@@ -175,8 +177,8 @@ public class Main {//本部分实现所有开放接口的请求与响应
                 System.out.println("请输入第三方订单号DockingOrderID（回车键结束）");
                 String DockingOrderID = scanner.next();
                 //调用聚合支付接口
-                ApiInstance.AggregateOrder(DeviceID,devicesecret,DockingDeviceID,DockingOrderID,nonceStr,PayMoney,SiteUserID,timestamp,DockingSecret);break;
-            }
+                ApiInstance.AggregateOrder(DeviceID,devicesecret,DockingDeviceID,DockingOrderID,nonceStr,PayMoney,SiteUserID,timestamp,DockingSecret);
+            }break;
             case (10):{
                 //设备秘钥devicesecret
                 System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
@@ -194,8 +196,8 @@ public class Main {//本部分实现所有开放接口的请求与响应
                 System.out.println("请输入支付类型PayType：wx-微信支付；ali-支付宝（回车键结束）");
                 String PayType = scanner.next();
                 //调用wap支付接口
-                ApiInstance.UnifiedOrder(DeviceID,devicesecret,DockingDeviceID,DockingOrderID,nonceStr,PayMoney,PayType,SiteUserID,timestamp,DockingSecret);break;
-            }
+                ApiInstance.UnifiedOrder(DeviceID,devicesecret,DockingDeviceID,DockingOrderID,nonceStr,PayMoney,PayType,SiteUserID,timestamp,DockingSecret);
+            }break;
             case (11):{
                 //设备秘钥devicesecret
                 System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
@@ -207,8 +209,8 @@ public class Main {//本部分实现所有开放接口的请求与响应
                 System.out.println("请输入交易订单号OrderID（回车键结束）");
                 String OrderID = scanner.next();
                 //调用订单关闭接口
-                ApiInstance.CloseOrder(DeviceID,devicesecret,DockingDeviceID,nonceStr, OrderID,SiteUserID,timestamp,DockingSecret);break;
-            }
+                ApiInstance.CloseOrder(DeviceID,devicesecret,DockingDeviceID,nonceStr, OrderID,SiteUserID,timestamp,DockingSecret);
+            }break;
             case (12):{
                 //设备秘钥devicesecret
                 System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
@@ -217,8 +219,8 @@ public class Main {//本部分实现所有开放接口的请求与响应
                 System.out.println("请输入卡券号Scanticketno（回车键结束）");
                 String Scanticketno = scanner.next();
                 //调用口碑单品卡券核销接口
-                ApiInstance.UseKouBeiCard(DeviceID,devicesecret,DockingDeviceID,nonceStr,Scanticketno,timestamp,DockingSecret);break;
-            }
+                ApiInstance.UseKouBeiCard(DeviceID,devicesecret,DockingDeviceID,nonceStr,Scanticketno,timestamp,DockingSecret);
+            }break;
             case (13):{
                 //设备秘钥devicesecret
                 System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
@@ -227,8 +229,8 @@ public class Main {//本部分实现所有开放接口的请求与响应
                 System.out.println("请输入交易日期TradeDate，形如20180726（回车键结束）");
                 String TradeDate = scanner.next();
                 //调用对账单接口
-                ApiInstance.DownloadBill(DeviceID,devicesecret,DockingDeviceID,nonceStr,timestamp,TradeDate,DockingSecret);break;
-            }
+                ApiInstance.DownloadBill(DeviceID,devicesecret,DockingDeviceID,nonceStr,timestamp,TradeDate,DockingSecret);
+            }break;
             case (14):{
                 //交易订单号OrderID
                 System.out.println("请输入交易订单号OrderID（回车键结束）");
@@ -246,10 +248,32 @@ public class Main {//本部分实现所有开放接口的请求与响应
                 System.out.println("请输入支付类型PayType：wx-微信支付；ali-支付宝;other-其他（回车键结束）");
                 String PayType = scanner.next();
                 //调用订单异步通知接口
-                ApiInstance.AsynchronInform(nonceStr,OrderID,OrderMoney,OrderState,PayTime,PayType,timestamp,DockingSecret);break;
-            }
+                ApiInstance.AsynchronInform(nonceStr,OrderID,OrderMoney,OrderState,PayTime,PayType,timestamp,DockingSecret);
+            }break;
+            case (15):{
+                //设备秘钥devicesecret
+                System.out.println("请输入设备注册返回的参数devicesecret（回车键结束）");
+                String devicesecret = scanner.next();
+                // 登录账号SiteUserID
+                System.out.println("请输入收银员账号SiteUserID（回车键结束）");
+                int SiteUserID = scanner.nextInt();
+                //收款金额PayMoney
+                System.out.println("请输入收款金额PayMoney（回车键结束）");
+                BigDecimal PayMoney = scanner.nextBigDecimal();
+                //小程序AppID
+                System.out.println("请输入小程序AppID：");
+                String AppID = scanner.next();
+                //小程序OpenID
+                System.out.println("请输入小程序OpenID：");
+                String OpenID = scanner.next();
+                //第三方订单号DockingOrderID
+                System.out.println("请输入第三方订单号DockingOrderID（回车键结束）");
+                String DockingOrderID = scanner.next();
+                //调用小程序支付接口
+                ApiInstance.AppletPay(AppID,DeviceID,devicesecret,DockingDeviceID,DockingOrderID,nonceStr,OpenID,PayMoney,SiteUserID,timestamp,DockingSecret);
+            }break;
             default: System.out.println("您输入接口选项不存在，请重新确认后输入");break;
         }
-        System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = == = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
+        System.out.println(" = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
     }
 }
