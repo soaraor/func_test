@@ -46,8 +46,9 @@ public class DataUtil {//全局参数的处理获取方法
         String Sign = "";
         //拼接字符
         String StringSignTemp = stringA +"&"+ DockingSecret;
+        //全部转为小写
         StringSignTemp = StringSignTemp.toLowerCase();
-        //md5加密
+        //md5处理
         Sign =MD5.MD5(StringSignTemp);
         return Sign;
     }
