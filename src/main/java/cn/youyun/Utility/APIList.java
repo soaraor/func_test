@@ -558,7 +558,7 @@ public class APIList {//本部分是所有开放web api的具体实现逻辑
     }
 
     /**
-    *以下stringA、GetkeyvalueTreemap、GetkeyList、GetvalueList四个方法，共同实现了“读取参数名-排ASCII序-拼接saringA”了
+    *以下stringA、GetkeyvalueTreemap、GetkeyList、GetvalueList四个方法，共同实现了“读取参数名-》排ASCII序-》拼接saringA”了
     * */
 
     /*拼接stringA*/

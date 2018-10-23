@@ -3,15 +3,15 @@ package cn.youyun.Utility;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-public class Main {//本部分实现所有开放接口的请求与响应
+//本部分实现所有开放接口的请求与响应
+public class Main {
     public static void main(String[] args) {
         String domain = "http://test.api.docking.aduer.com";//接口请求域
         APIList ApiInstance = new APIList(domain);
 
         Scanner scanner = new Scanner(System.in);//定义键盘读取器
 
-        /**
-         * DockingDeviceID,UserStr,DeviceName,GUID,DockingSecret
+        /* DockingDeviceID,UserStr,DeviceName,GUID,DockingSecret
          * 以上几个全局变量的读取，可以在第一次手动键入得到设备秘钥devicesecret后，将几个全局变量赋值常量，并将scanner读值语句注释化，简化后续操作
          */
 
@@ -37,7 +37,7 @@ public class Main {//本部分实现所有开放接口的请求与响应
         String GUID = "kveb7WKHct";
 
         //获取随机字符串
-        String nonceStr = DataUtil.GetNoncestr();
+        String nonceStr = DataUtil.GetNonceStr();
 
         //获取时间戳
         String timestamp = DataUtil.GetTimestamp();
